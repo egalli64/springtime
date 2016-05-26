@@ -1,3 +1,6 @@
+/*
+ * More info on http://bitingcode.blogspot.com/2016/05/hello-spring-boot.html
+ */
 package dd.manny.hello;
 
 import org.springframework.boot.SpringApplication;
