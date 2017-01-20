@@ -16,6 +16,7 @@ public class BraveKnight implements Knight {
         this.quest = quest;
     }
 
+    @Override
     public String doQuest() {
         log.info("BraveKnight is embarking his quest");
         return quest.embark();
