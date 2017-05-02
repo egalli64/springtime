@@ -7,8 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping({"/", "/homepage"})
 public class HomeController {
-    @RequestMapping(value = "/", method = GET)
+    @RequestMapping(method = GET)
     public String home(Model model) {
         return "home";
     }
