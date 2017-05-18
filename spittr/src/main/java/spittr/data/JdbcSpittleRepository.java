@@ -1,5 +1,6 @@
 /**
  * http://thisthread.blogspot.com/2017/05/from-model-to-view-through-spring.html
+ * http://thisthread.blogspot.com/2017/05/showing-paged-list-of-spittles.html
  */
 
 package spittr.data;
@@ -29,7 +30,7 @@ public class JdbcSpittleRepository implements SpittleRepository {
     public List<Spittle> findSpittles(long max, int count) {
         List<Spittle> result = new ArrayList<>();
         for (long i = 0; i < count; i++) {
-            result.add(new Spittle(i, "Message " + i, LocalDateTime.now(), 1.0 * i, 2.0 * i));
+            result.add(new Spittle(i, "Message " + i, LocalDateTime.now(), 1.0 * i, (double)max));
         }
 
         return result;
