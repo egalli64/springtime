@@ -1,6 +1,7 @@
 /**
  * http://thisthread.blogspot.com/2017/05/from-model-to-view-through-spring.html
  * http://thisthread.blogspot.com/2017/05/showing-paged-list-of-spittles.html
+ * http://thisthread.blogspot.com/2017/05/showing-single-spittle.html
  */
 
 package spittr.web;
@@ -53,6 +54,21 @@ public class SpittleControllerTest {
         mockMvc.perform(get("/spittles?max=238900&count=50")).andExpect(view().name("spittles"))
                 .andExpect(model().attributeExists("spittleList"))
                 .andExpect(model().attribute("spittleList", hasItems(expectedSpittles.toArray())));
+    }
+
+    @Test
+    public void testSpittle() throws Exception {
+        Spittle expectedSpittle = new Spittle("A spittle", LocalDateTime.now());
+        SpittleRepository mockRepository = mock(SpittleRepository.class);
+        when(mockRepository.findOne(42)).thenReturn(expectedSpittle);
+
+        SpittleController controller = new SpittleController(mockRepository);
+        MockMvc mockMvc = standaloneSetup(controller).build();
+
+        mockMvc.perform(get("/spittles/42"))
+                .andExpect(view().name("spittle"))
+                .andExpect(model().attributeExists("spittle"))
+                .andExpect(model().attribute("spittle", expectedSpittle));
     }
 
     private List<Spittle> createSpittleList(int count) {

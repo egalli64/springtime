@@ -1,6 +1,7 @@
 /**
  * http://thisthread.blogspot.com/2017/05/from-model-to-view-through-spring.html
  * http://thisthread.blogspot.com/2017/05/showing-paged-list-of-spittles.html
+ * http://thisthread.blogspot.com/2017/05/showing-single-spittle.html
  */
 
 package spittr.data;
@@ -38,7 +39,7 @@ public class JdbcSpittleRepository implements SpittleRepository {
 
     @Override
     public Spittle findOne(long id) {
-        return new Spittle(id, "Fake Message", LocalDateTime.now(), 0.0, 0.0);
+        return new Spittle(id, "Fake Message", LocalDateTime.now(), (double)id, (double)id);
     }
 
     @Override
