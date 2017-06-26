@@ -1,18 +1,37 @@
 /**
  * http://thisthread.blogspot.com/2017/06/spitter-registration.html
+ * http://thisthread.blogspot.com/2017/06/using-tha-java-validation-api.html
  */
 package spittr;
 
 import java.util.Objects;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
+
 public class Spitter {
 
     private Long id;
 
+    @NotNull
+    @Size(min = 5, max = 16)
     private String username;
+
+    @NotNull
+    @Size(min = 8)
     private String password;
+
+    @NotNull
+    @Size(min = 2, max = 30)
     private String firstName;
+
+    @NotNull
+    @Size(min = 2, max = 30)
     private String lastName;
+
+    @NotNull
+    @Email
     private String email;
 
     public Spitter() {
@@ -81,19 +100,16 @@ public class Spitter {
 
     @Override
     public boolean equals(Object that) {
-        if(this == that) {
+        if (this == that) {
             return true;
         }
         if (!(that instanceof Spitter))
             return false;
 
         Spitter other = (Spitter) that;
-        return this.id == other.id
-                && Objects.equals(this.firstName, other.firstName)
-                && Objects.equals(this.lastName, other.lastName)
-                && Objects.equals(this.username, other.username)
-                && Objects.equals(this.password, other.password)
-                && Objects.equals(this.email, other.email);
+        return this.id == other.id && Objects.equals(this.firstName, other.firstName)
+                && Objects.equals(this.lastName, other.lastName) && Objects.equals(this.username, other.username)
+                && Objects.equals(this.password, other.password) && Objects.equals(this.email, other.email);
     }
 
     @Override
