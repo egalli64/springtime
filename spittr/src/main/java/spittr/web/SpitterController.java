@@ -1,6 +1,7 @@
 /**
  * http://thisthread.blogspot.com/2017/06/spitter-registration.html
  * http://thisthread.blogspot.com/2017/06/using-tha-java-validation-api.html
+ * http://thisthread.blogspot.com/2017/06/a-view-on-spring-error-messages.html
  */
 package spittr.web;
 
@@ -27,7 +28,8 @@ public class SpitterController {
     }
 
     @RequestMapping(value = "/register", method = GET)
-    public String showRegistrationForm() {
+    public String showRegistrationForm(Model model) {
+        model.addAttribute(new Spitter());
         return "registerForm";
     }
 
