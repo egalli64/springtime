@@ -22,7 +22,6 @@ import spittr.data.SpittleRepository;
 @Controller
 @RequestMapping("/spittles")
 public class SpittleController {
-    private static final String MAX_ID = "9223372036854775807"; // Long.MAX_VALUE
     private static final String DEFAULT_COUNT = "20";
 
     private SpittleRepository spittleRepository;
@@ -33,9 +32,9 @@ public class SpittleController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Spittle> spittles(@RequestParam(value = "max", defaultValue = MAX_ID) long max,
+    public List<Spittle> spittles(
             @RequestParam(value = "count", defaultValue = DEFAULT_COUNT) int count) {
-        return spittleRepository.findSpittles(max, count);
+        return spittleRepository.findRecent(count);
     }
 
     @RequestMapping(value = "/{spittleId}", method = RequestMethod.GET)

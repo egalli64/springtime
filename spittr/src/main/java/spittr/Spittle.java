@@ -1,60 +1,56 @@
 /**
  * http://thisthread.blogspot.com/2017/05/from-model-to-view-through-spring.html
+ * http://thisthread.blogspot.com/2017/07/using-jdbctemplate-in-spitter-web-app.html
  */
 package spittr;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Objects;
 
 public class Spittle {
     private final Long id;
+    private final Spitter spitter;
     private final String message;
-    private final LocalDateTime time;
-    private Double latitude;
-    private Double longitude;
+    private final Instant time;
 
-    public Spittle(String message, LocalDateTime time) {
-        this(null, message, time, null, null);
+    public Spittle(String message, Instant time) {
+        this(null, null, message, time);
     }
 
-    public Spittle(Long id, String message, LocalDateTime time, Double longitude, Double latitude) {
+    public Spittle(Long id, Spitter spitter, String message, Instant time) {
         this.id = id;
+        this.spitter = spitter;
         this.message = message;
         this.time = time;
-        this.longitude = longitude;
-        this.latitude = latitude;
     }
 
     public long getId() {
         return id;
     }
 
+    public Spitter getSpitter() {
+        return this.spitter;
+    }
+
     public String getMessage() {
         return message;
     }
 
-    public LocalDateTime getTime() {
+    public Instant getTime() {
         return time;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public Double getLatitude() {
-        return latitude;
     }
 
     @Override
     final public boolean equals(Object that) {
-        if(this == that) {
+        if (this == that) {
             return true;
         }
         if (!(that instanceof Spittle))
             return false;
 
         Spittle other = (Spittle) that;
-        return this.id == other.id && Objects.equals(this.time, other.time);
+        return this.id == other.id && Objects.equals(this.spitter, other.spitter)
+                && Objects.equals(this.time, other.time);
     }
 
     @Override
